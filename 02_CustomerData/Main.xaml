@@ -1,0 +1,307 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="output_renewal_date" Type="OutArgument(x:String)" />
+    <x:Property Name="in_handler_id" Type="InArgument(x:String)" />
+    <x:Property Name="in_policy_id" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Main_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Plugin.Workflow</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Sequence" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="custID" />
+      <Variable x:TypeArguments="ui:QueueItem" Name="request_queue" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="handlerID" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="refHandlerID" />
+    </Sequence.Variables>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_7">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[custID]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_policy_id]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_8">
+      <Assign.To>
+        <OutArgument x:TypeArguments="ui:GenericValue">[handlerID]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="ui:GenericValue">[in_handler_id]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap2010:WorkflowViewState.IdRef="Assign_9">
+      <Assign.To>
+        <OutArgument x:TypeArguments="ui:GenericValue">[refHandlerID]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="ui:GenericValue">["R_"+custID+"_"+handlerID]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Put_To_Request_Queue" sap2010:WorkflowViewState.IdRef="AddQueueItem_2" Priority="High" QueueType="CustomerInvoiceRequest" Reference="[refHandlerID]">
+      <ui:AddQueueItem.ItemInformation>
+        <InArgument x:TypeArguments="x:Int32" x:Key="input_cust_id">[Int32.Parse(custID)]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="input_queue_reference">[refHandlerID]</InArgument>
+      </ui:AddQueueItem.ItemInformation>
+    </ui:AddQueueItem>
+    <TryCatch DisplayName="Try Catch" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <ui:GetQueueItem ContinueOnError="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get_From_Queue" sap2010:WorkflowViewState.IdRef="GetQueueItem_1" QueueType="CustomerInvoiceRequest" TransactionItem="[request_queue]" />
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:NullReferenceException" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <ActivityAction x:TypeArguments="s:NullReferenceException">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:NullReferenceException" Name="exception" />
+            </ActivityAction.Argument>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_4" NewSession="True" Private="False" Url="http://localhost:9999/">
+            <ui:OpenBrowser.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                </ActivityAction.Argument>
+                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_16">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:String" Name="cust_policy_ren_date" />
+                    <Variable x:TypeArguments="x:String" Name="cust_process_reference" />
+                    <Variable x:TypeArguments="ui:QueueItem" Name="response_queue" />
+                  </Sequence.Variables>
+                  <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <ui:SetValue ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Set Text 'INPUT  Search_Data'" sap2010:WorkflowViewState.IdRef="SetValue_1" Text="[custID]">
+                      <ui:SetValue.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="94bcaa1a42cd0225aff85106433ddaac" Selector="&lt;webctrl id='Search_Data' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:SetValue.Target>
+                    </ui:SetValue>
+                    <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT'" sap2010:WorkflowViewState.IdRef="Click_5" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                      <ui:Click.CursorPosition>
+                        <ui:CursorPosition Position="Center">
+                          <ui:CursorPosition.OffsetX>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetX>
+                          <ui:CursorPosition.OffsetY>
+                            <InArgument x:TypeArguments="x:Int32" />
+                          </ui:CursorPosition.OffsetY>
+                        </ui:CursorPosition>
+                      </ui:Click.CursorPosition>
+                      <ui:Click.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="504e5bc271a188268fbe4f3acc35b8ee" Selector="&lt;webctrl tag='INPUT' type='submit' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:Click.Target>
+                    </ui:Click>
+                    <Delay mva:VisualBasic.Settings="{x:Null}" DisplayName="Delay 1 second" Duration="00:00:01" sap2010:WorkflowViewState.IdRef="Delay_1">
+                      <TextExpression.Namespaces>
+                        <sco:Collection x:TypeArguments="x:String">
+                          <x:String>System.Activities</x:String>
+                          <x:String>System.Activities.Statements</x:String>
+                          <x:String>System.Activities.Expressions</x:String>
+                          <x:String>System.Activities.Validation</x:String>
+                          <x:String>System.Activities.XamlIntegration</x:String>
+                          <x:String>Microsoft.VisualBasic.Activities</x:String>
+                          <x:String>System</x:String>
+                          <x:String>System.Collections.Generic</x:String>
+                          <x:String>System.Data</x:String>
+                          <x:String>System.Diagnostics</x:String>
+                          <x:String>System.IO</x:String>
+                          <x:String>System.Linq</x:String>
+                          <x:String>System.Management.Automation</x:String>
+                          <x:String>System.Net.Mail</x:String>
+                          <x:String>System.Xml</x:String>
+                          <x:String>System.Xml.Linq</x:String>
+                          <x:String>UiPath.Library</x:String>
+                          <x:String>System.Windows.Markup</x:String>
+                        </sco:Collection>
+                      </TextExpression.Namespaces>
+                      <TextExpression.References>
+                        <sco:Collection x:TypeArguments="AssemblyReference">
+                          <AssemblyReference>System.Activities</AssemblyReference>
+                          <AssemblyReference>mscorlib</AssemblyReference>
+                          <AssemblyReference>System.Data</AssemblyReference>
+                          <AssemblyReference>System</AssemblyReference>
+                          <AssemblyReference>System.Core</AssemblyReference>
+                          <AssemblyReference>System.Management.Automation</AssemblyReference>
+                          <AssemblyReference>System.Xml</AssemblyReference>
+                          <AssemblyReference>System.Xml.Linq</AssemblyReference>
+                          <AssemblyReference>UiPath.Library</AssemblyReference>
+                          <AssemblyReference>PresentationFramework</AssemblyReference>
+                          <AssemblyReference>WindowsBase</AssemblyReference>
+                          <AssemblyReference>PresentationCore</AssemblyReference>
+                          <AssemblyReference>System.Xaml</AssemblyReference>
+                        </sco:Collection>
+                      </TextExpression.References>
+                    </Delay>
+                    <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'TD'" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                      <ui:GetValue.Target>
+                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="4a14dabc237f75381bb8f38ee3aa8858" Selector="&lt;webctrl tag='TABLE' /&gt;&lt;webctrl tableCol='6' tag='TD' /&gt;" WaitForReady="INTERACTIVE" />
+                      </ui:GetValue.Target>
+                      <ui:GetValue.Value>
+                        <OutArgument x:TypeArguments="x:String">[output_renewal_date]</OutArgument>
+                      </ui:GetValue.Value>
+                    </ui:GetValue>
+                    <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window 'chrome.exe Insurance'" sap2010:WorkflowViewState.IdRef="CloseWindow_1" InformativeScreenshot="9372750c8cda942fb7afdd12de523c56" WaitForReady="INTERACTIVE" />
+                  </Sequence>
+                  <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set Request Queue Transaction Status" ErrorType="Business" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_1" Status="Successful" TransactionItem="[request_queue]">
+                    <ui:SetTransactionStatus.Output>
+                      <InArgument x:TypeArguments="x:String" x:Key="renewal_date">[output_renewal_date]</InArgument>
+                    </ui:SetTransactionStatus.Output>
+                  </ui:SetTransactionStatus>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_5">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[cust_policy_ren_date]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[output_renewal_date]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[cust_process_reference]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[request_queue.Reference]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:AddTransactionItem ContinueOnError="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Put_To_Response_Queue" sap2010:WorkflowViewState.IdRef="AddTransactionItem_1" QueueType="CustomerInvoiceResponse" Reference="[cust_process_reference]" TransactionItem="[response_queue]">
+                    <ui:AddTransactionItem.TransactionInformation>
+                      <InArgument x:TypeArguments="x:String" x:Key="output_api">[cust_policy_ren_date]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="output_reference">[cust_process_reference]</InArgument>
+                    </ui:AddTransactionItem.TransactionInformation>
+                  </ui:AddTransactionItem>
+                  <ui:SetTransactionStatus ContinueOnError="{x:Null}" Reason="{x:Null}" ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Set Response Queue Transaction Status" ErrorType="Business" sap2010:WorkflowViewState.IdRef="SetTransactionStatus_2" Status="Successful" TransactionItem="[response_queue]">
+                    <ui:SetTransactionStatus.Output>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                    </ui:SetTransactionStatus.Output>
+                  </ui:SetTransactionStatus>
+                </Sequence>
+              </ActivityAction>
+            </ui:OpenBrowser.Body>
+          </ui:OpenBrowser>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+    <sads:DebugSymbol.Symbol>dzBEOlxTYXRoaXNoXDAxX1BTU1NcUlBBXDAyX0N1c3RvbWVyRGF0YVxNYWluLnhhbWw0SAP4AQ4CAQFPBVYOAgFEVwVeDgIBP18FZg4CATlnBWwXAgE0bQX2ARACAQJUMFQ+AgFHUTFROQIBRVw3XEYCAUJZOFlDAgFAZDdkUgIBPGE4YUYCATpn2gFn6gECAThntwFnzwECATdpRWlaAgE2ak5qXAIBNW8Jb98BAgEwewn0ARQCAQNvogFvugECATNvywFv3AECATF8C/MBHAIBBHzFAXzdAQIBL4IBEfABHAIBBYgBE88BHgIBIdABE9QBLQIBHNUBE9wBHAIBF90BE+QBHAIBE+UBE+oBKwIBCesBE+8BLQIBBokBFY0BIwIBK44BFZwBIAIBKZ0BFcUBHQIBJ8YBFc0BIwIBI84BFc4BmwICASLSAVPSAWgCAR/QAbEC0AHCAgIBHdoBPtoBUwIBGtcBP9cBVQIBGOIBPuIBVwIBFt8BP98BVwIBFOUBgQLlAZsCAgER5QHdAeUB9gECARDoAVfoAW8CAQ7nAVHnAWcCAQzlAawC5QG+AgIBCusBsgLrAcQCAgEHiQHIAYkB0gECASyLAagBiwHYAQIBLpoBqAGaAdUBAgEqnQFmnQFwAgEoywFBywFWAgEkyAGoAcgB7gECASY=</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_7" sap:VirtualizedContainerService.HintSize="454.4,60" />
+      <sap2010:ViewStateData Id="Assign_8" sap:VirtualizedContainerService.HintSize="454.4,60" />
+      <sap2010:ViewStateData Id="Assign_9" sap:VirtualizedContainerService.HintSize="454.4,60" />
+      <sap2010:ViewStateData Id="AddQueueItem_2" sap:VirtualizedContainerService.HintSize="454.4,22.4" />
+      <sap2010:ViewStateData Id="GetQueueItem_1" sap:VirtualizedContainerService.HintSize="200,22.4" />
+      <sap2010:ViewStateData Id="Catch`1_1" sap:VirtualizedContainerService.HintSize="440,22.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetValue_1" sap:VirtualizedContainerService.HintSize="314.4,135.2" />
+      <sap2010:ViewStateData Id="Click_5" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Delay_1" sap:VirtualizedContainerService.HintSize="314.4,22.4" />
+      <sap2010:ViewStateData Id="GetValue_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="CloseWindow_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="Sequence_15" sap:VirtualizedContainerService.HintSize="336.8,764">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="SetTransactionStatus_1" sap:VirtualizedContainerService.HintSize="336.8,22.4" />
+      <sap2010:ViewStateData Id="Assign_5" sap:VirtualizedContainerService.HintSize="336.8,60" />
+      <sap2010:ViewStateData Id="Assign_6" sap:VirtualizedContainerService.HintSize="336.8,60" />
+      <sap2010:ViewStateData Id="AddTransactionItem_1" sap:VirtualizedContainerService.HintSize="336.8,22.4" />
+      <sap2010:ViewStateData Id="SetTransactionStatus_2" sap:VirtualizedContainerService.HintSize="336.8,22.4" />
+      <sap2010:ViewStateData Id="Sequence_16" sap:VirtualizedContainerService.HintSize="359.2,1276">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="OpenBrowser_4" sap:VirtualizedContainerService.HintSize="414.4,1376" />
+      <sap2010:ViewStateData Id="Sequence_7" sap:VirtualizedContainerService.HintSize="436.8,1500.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="TryCatch_1" sap:VirtualizedContainerService.HintSize="454.4,1732" />
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="476.8,2219.2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="516.8,2299.2" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

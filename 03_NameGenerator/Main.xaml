@@ -1,0 +1,204 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="Main_1"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="StockBot">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="entityName" />
+      <Variable x:TypeArguments="x:String" Name="entityPhone" />
+      <Variable x:TypeArguments="x:String" Name="returnValue" />
+    </Sequence.Variables>
+    <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" IsPassword="False" Label="Please enter country" Title="Enter Name set">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[entityName]</OutArgument>
+      </ui:InputDialog.Result>
+      <sap2010:WorkflowViewState.IdRef>InputDialog_1</sap2010:WorkflowViewState.IdRef>
+    </ui:InputDialog>
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" Text="[&quot;You have entered : &quot; + entityName]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_2" />
+    <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" Hidden="False" NewSession="True" Private="False" Url="https://www.fakenamegenerator.com/">
+      <ui:OpenBrowser.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do">
+            <ui:SelectItem ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'SELECT  c'" Item="[entityName]">
+              <ui:SelectItem.Items>
+                <scg:List x:TypeArguments="x:String" Capacity="32">
+                  <x:String>Australia</x:String>
+                  <x:String>Austria</x:String>
+                  <x:String>Belgium</x:String>
+                  <x:String>Brazil</x:String>
+                  <x:String>Canada</x:String>
+                  <x:String>Cyprus (Anglicized)</x:String>
+                  <x:String>Cyprus (Greek)</x:String>
+                  <x:String>Czech Republic</x:String>
+                  <x:String>Denmark</x:String>
+                  <x:String>Estonia</x:String>
+                  <x:String>Finland</x:String>
+                  <x:String>France</x:String>
+                  <x:String>Germany</x:String>
+                  <x:String>Greenland</x:String>
+                  <x:String>Hungary</x:String>
+                  <x:String>Iceland</x:String>
+                  <x:String>Italy</x:String>
+                  <x:String>Netherlands</x:String>
+                  <x:String>New Zealand</x:String>
+                  <x:String>Norway</x:String>
+                  <x:String>Poland</x:String>
+                  <x:String>Portugal</x:String>
+                  <x:String>Slovenia</x:String>
+                  <x:String>South Africa</x:String>
+                  <x:String>Spain</x:String>
+                  <x:String>Sweden</x:String>
+                  <x:String>Switzerland</x:String>
+                  <x:String>Tunisia</x:String>
+                  <x:String>United Kingdom</x:String>
+                  <x:String>United States</x:String>
+                  <x:String>Uruguay</x:String>
+                </scg:List>
+              </ui:SelectItem.Items>
+              <ui:SelectItem.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="1061aafb74bd38bee99351d4a141986f" Selector="&lt;webctrl id='c' tag='SELECT' /&gt;" WaitForReady="INTERACTIVE" />
+              </ui:SelectItem.Target>
+              <sap2010:WorkflowViewState.IdRef>SelectItem_1</sap2010:WorkflowViewState.IdRef>
+            </ui:SelectItem>
+            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'INPUT  genbtn'" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+              <ui:Click.CursorPosition>
+                <ui:CursorPosition Position="Center">
+                  <ui:CursorPosition.OffsetX>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetX>
+                  <ui:CursorPosition.OffsetY>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:CursorPosition.OffsetY>
+                </ui:CursorPosition>
+              </ui:Click.CursorPosition>
+              <ui:Click.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="7d89dd28d9d789dc57280e74b5a78eee" Selector="&lt;webctrl id='genbtn' tag='INPUT' /&gt;" WaitForReady="INTERACTIVE" />
+              </ui:Click.Target>
+              <sap2010:WorkflowViewState.IdRef>Click_1</sap2010:WorkflowViewState.IdRef>
+            </ui:Click>
+            <ui:GetFullText DisplayName="Get Full Text 'H3'" IgnoreHidden="False">
+              <ui:GetFullText.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="0c02ac1d3cbb1f0d2be930a35dc77d0a" Selector="&lt;webctrl idx='1' tag='H3' /&gt;" WaitForReady="INTERACTIVE" />
+              </ui:GetFullText.Target>
+              <ui:GetFullText.Text>
+                <OutArgument x:TypeArguments="x:String">[entityName]</OutArgument>
+              </ui:GetFullText.Text>
+              <sap2010:WorkflowViewState.IdRef>GetFullText_1</sap2010:WorkflowViewState.IdRef>
+            </ui:GetFullText>
+            <ui:GetFullText DisplayName="Get Full Text 'DD'" IgnoreHidden="False">
+              <ui:GetFullText.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="74501d6382ed06eccc9c921dfaf1b06b" Selector="&lt;webctrl idx='2' isleaf='1' tag='DD' /&gt;" WaitForReady="INTERACTIVE" />
+              </ui:GetFullText.Target>
+              <ui:GetFullText.Text>
+                <OutArgument x:TypeArguments="x:String">[entityPhone]</OutArgument>
+              </ui:GetFullText.Text>
+              <sap2010:WorkflowViewState.IdRef>GetFullText_2</sap2010:WorkflowViewState.IdRef>
+            </ui:GetFullText>
+            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" Text="[&quot;You've got &quot; + entityName + &quot; - &quot; + entityPhone]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_3" />
+            <Assign>
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[returnValue]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[string.Concat(entityName,entityPhone)]</InArgument>
+              </Assign.Value>
+              <sap2010:WorkflowViewState.IdRef>Assign_1</sap2010:WorkflowViewState.IdRef>
+            </Assign>
+            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message Box" Text="[returnValue]" TopMost="True" sap2010:WorkflowViewState.IdRef="MessageBox_4" />
+            <sap2010:WorkflowViewState.IdRef>Sequence_2</sap2010:WorkflowViewState.IdRef>
+          </Sequence>
+        </ActivityAction>
+      </ui:OpenBrowser.Body>
+      <sap2010:WorkflowViewState.IdRef>OpenBrowser_1</sap2010:WorkflowViewState.IdRef>
+    </ui:OpenBrowser>
+    <sap2010:WorkflowViewState.IdRef>Sequence_3</sap2010:WorkflowViewState.IdRef>
+    <sads:DebugSymbol.Symbol>dzZEOlxTYXRoaXNoXDAxX1BTU1NcUlBBXENoYXRCb3RSUEFJbnRlZ3JhdGlvblxNYWluLnhhbWwcPAOuAQ4CAQFCBUcWAgEjSAVI3AECASBJBasBFgIBAkJcQnICASdEMUQ9AgElQnlCiQECASRIa0ibAQIBIUmPAUmzAQIBH08LpwEWAgEDUA14HQIBG3kNiAEYAgEZiQENkQEeAgEVkgENmgEeAgERmwENmwH8AQIBDZwBDaQBFgIBB6UBDaUBwwECAQRQjwFQnQECARx1oAF1xwECAR6FAaABhQHLAQIBGosBoAGLAcQBAgEYjgE5jgFFAgEWlAGgAZQBzwECARSXATmXAUYCARKbAXObAbsBAgEOoQE4oQFfAgEKngE5ngFGAgEIpQFzpQGCAQIBBQ==</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="InputDialog_1" sap:VirtualizedContainerService.HintSize="414.4,92.8" />
+      <sap2010:ViewStateData Id="MessageBox_2" sap:VirtualizedContainerService.HintSize="414.4,60" />
+      <sap2010:ViewStateData Id="SelectItem_1" sap:VirtualizedContainerService.HintSize="314.4,135.2" />
+      <sap2010:ViewStateData Id="Click_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="GetFullText_1" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="GetFullText_2" sap:VirtualizedContainerService.HintSize="314.4,107.2" />
+      <sap2010:ViewStateData Id="MessageBox_3" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="MessageBox_4" sap:VirtualizedContainerService.HintSize="314.4,60" />
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="336.8,1001.6">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="OpenBrowser_1" sap:VirtualizedContainerService.HintSize="414.4,1101.6" />
+      <sap2010:ViewStateData Id="Sequence_3" sap:VirtualizedContainerService.HintSize="436.8,1459.2">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Main_1" sap:VirtualizedContainerService.HintSize="476.8,1579.2" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>

@@ -1,0 +1,42 @@
+Updated 10:35 27-11-2018
+
+regutil activate /email=sathish@paripoorna.in /code=386704869024403143
+
+Default Pwd: 890iop
+
+Host Name: PSSS-SATHISH
+
+Orchestrator Name: orchestrator_admin
+Password: Psss@2018
+
+SQL IP - 192.168.4.85\SQLExpress
+DB Name - UiPath
+UN - sa
+PWD - Psss@2018
+
+License code: 386704869024403143
+License status: 1
+Device id: 8sqlWQ4i3Qtop+Ouj9ga
+License expire date: 22-01-2019 12:54:14
+Subscription expire date: 22-01-2019 12:54:14
+Attended: 10
+Unattended: 10
+Free: 10
+Dev: 10
+AttendedConcurrent: 0
+DevConcurrent: 0
+
+API Key - 89CC6DC6-5716-4CB3-91B3-BF5D0451BD87
+
+Machine Key - b3e1d5d1-cefc-43bc-8173-32ac091935d0
+
+18.3.3+Branch.master.Sha.dad278851683d948236b522f6a0c8dd584803e65
+
+Project published successfully.
+Name: ChatBotRPAIntegration
+Version: 1.0.6905.19509
+Location: https://psss-sathish/
+
+Licence Activate Link:
+
+regutil activate /email=sathish@paripoorna.in /code=386704869024403143
